@@ -1,20 +1,17 @@
 {% extends "template.html" %}
-{% block title %}Login page{% endblock %}
+{% block title %}test flask repeat names{% endblock %}
 
 {% block heading %}
-Login
+Hello, your name is?
 {% endblock %}
 
 {% block body %}
-<form action="#" method="POST">
 
-  <p>Name:</p>
-  <p><input type="text" name="nm"/></p>
-  <p>Password:</p>
-  <p><input type="password" name="pwd"></p>
-
-  <p><input type="submit"value="LOGIN"/></p>
-
+<form action="{{url_for('hello')}}"method="post">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="inputName"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="inputLastName"><br><br>
+  <input type="submit" value="Submit">
 </form>
-
 {% endblock %}

@@ -4,25 +4,27 @@ import datetime
 app = Flask(__name__)
 
 
-# two methods will be used in this route, by default, FLASK will run get
-@app.route("/", methods=["POST", "GET"])
+@app.route("/")
 def index():
-    if request.method == "POST":
+    return render_template("index.html")
 
-        # request info from variable nm
-        user = request.form["nm"]
-        password = request.form["pwd"]
 
-        return redirect(url_for("users", usr=user, pwd=password))
+@app.route("/greetings", methods=["POST"])
+def hello():
+
+    # get variables first then change form later
+    name = request.form.get("inputName")
+    lastName = request.form.get("inputLastName")
+    name = name.capitalize()
+    lastName = lastName.capitalize()
+
+    # change form in else
+    if request.method == "GET":
+        return f"<h1>Please submit the form instead</h1>"
     else:
-        return render_template("index.html")
-
-
-#positional args = 2
-@app.route("/<usr>/<pwd>")
-def users(usr, pwd):
-    return f"<h1>{usr}</h1> <h2>{pwd}</h2>"
+        return render_template("secondPage.html", name=name, lastName=lastName)
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
